@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Funko Roll</title>
 <style>
+ #buscador {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 2px solid #b44fff;
+  background: #16162a;
+  color: #f0f0f0;
+  font-size: 1rem;
+  display: block;
+  margin: 0 auto 30px;
+}
+ 
   *{margin:0;padding:0;box-sizing:border-box;}
   :root{
     --bg:#0d0d1a;--card:#16162a;--accent:#b44fff;--cyan:#e0449a;--yellow:#f5c518;
@@ -131,6 +144,7 @@
     <button class="filter-btn" onclick="filter('series',this)">📺 Series</button>
     <button class="filter-btn" onclick="filter('peliculas',this)">🎬 Películas</button>
   </div>
+ <input type="text" id="buscador" placeholder="🔍 Buscar Funko...">
 
   <div class="grid" id="grid"></div>
 </section>
@@ -216,6 +230,15 @@ function comprar(nombre, precio){
 }
 
 render(productos);
+ 
+ document.getElementById('buscador').addEventListener('input', function() {
+  const texto = this.value.toLowerCase();
+  const filtrados = productos.filter(p =>
+    p.nombre.toLowerCase().includes(texto) ||
+    p.serie.toLowerCase().includes(texto)
+  );
+  render(filtrados);
+});
 </script>
 </body>
 </html>
